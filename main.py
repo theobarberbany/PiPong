@@ -24,6 +24,7 @@ class Game(object):
 	
 	def updateGame(self):
 		self.ball.updateBall()
+		self.ball.updateBallVelocity()
 	def resetGame(self):
 		self.ball.resetBall()
 
@@ -55,11 +56,30 @@ class Ball(object):
 		self.y_pos = t.height // 2
 		self.x_pos = t.width // 2
 	def updateBall(self):
-		logging.debug(" Y velocity: " + str(self.y_vel))
-		logging.debug("X velocity: " + str(self.x_vel))
+		#logging.debug(" Y velocity: " + str(self.y_vel))
+		#logging.debug("X velocity: " + str(self.x_vel))
 		self.y_pos += self.y_vel
 		self.x_pos += self.x_vel
-		logging.debug("self.y_pos"+ str(self.y_pos))
-		logging.debug("self.x_pos" + str(self.x_pos))
+		#logging.debug("self.y_pos"+ str(self.y_pos))
+		#logging.debug("self.x_pos" + str(self.x_pos))
+	def updateBallVelocity(self):
+		if self.x_pos == t.width or self.x_pos == 0:
+			self.x_vel = self.x_vel*-1
+		elif self.y_pos == t.height or self.y_pos == 0:
+			self.y_vel = self.y_vel*-1
+
+class Bat(object):
+	def __init__(self):
+		self.y_vel = 0
+		self.x_pos = 3
+		self.y_pos_mid = t.height // 2
+		self.y_pos_top = self.y_pos_mid + 1
+		self.y_pos_bottom = self.y_pos_mid - 1
+	def drawBat(self):
+		printbl(self.
+	def updateBat(self):
+		pass
+	def updateBatVelocity(self):
+		pass
 game = Game()
 game.startGame()
