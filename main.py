@@ -9,6 +9,7 @@ t = Terminal()
 print(t.fullscreen)
 print(t.hidden_cursor)
 print(t.clear)
+
 def printbl(x, y):
 	print(t.move_y(y) + t.move_x(x) + t.white_on_black(' '))
 
