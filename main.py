@@ -77,7 +77,7 @@ class Bat(object):
 		self.y_pos_top = self.y_pos_mid + 1
 		self.y_pos_bottom = self.y_pos_mid - 1
 	def drawBat(self):
-		printbl(self.
+		pass
 	def updateBat(self):
 		pass
 	def updateBatVelocity(self):
