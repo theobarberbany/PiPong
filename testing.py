@@ -16,3 +16,4 @@ def printbl(x, y):
 mylist = [(1,3),(22,8),(44,20)]
 for args in mylist:
 	printtest(*args)
+

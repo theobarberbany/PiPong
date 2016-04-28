@@ -19,10 +19,13 @@ class Game(object):
 	def __init__(self):
 		self.ball = Ball()
 		self.net = Net()
+		self.bat_0 = Bat(side = 0)
+		self.bat_1 = Bat(side = 1)
 	def drawGame(self):
 		self.ball.drawBall()
 		self.net.drawNet()
-	
+		self.bat_0.drawBat()
+		self.bat_1.drawBat()
 	def updateGame(self):
 		self.ball.updateBall()
 		self.ball.updateBallVelocity()
@@ -70,14 +73,24 @@ class Ball(object):
 			self.y_vel = self.y_vel*-1
 
 class Bat(object):
-	def __init__(self):
+	def __init__(self, side):
+		self.side = side
 		self.y_vel = 0
-		self.x_pos = 3
+		self.x_pos0 = 3
+		self.x_pos1 = t.width - 3
 		self.y_pos_mid = t.height // 2
 		self.y_pos_top = self.y_pos_mid + 1
 		self.y_pos_bottom = self.y_pos_mid - 1
 	def drawBat(self):
-		pass
+		if self.side == 0:
+			argslist = [(self.x_pos0, self.y_pos_mid), (self.x_pos0, self.y_pos_top), (self.x_pos0, self.y_pos_bottom)]
+			for args in argslist:
+				printbl(*args)
+		elif self.side == 1:
+			argslist = [(self.x_pos1, self.y_pos_mid), (self.x_pos1, self.y_pos_top), (self.x_pos1, self.y_pos_bottom)]
+			for args in argslist:
+				printbl(*args)
+
 	def updateBat(self):
 		pass
 	def updateBatVelocity(self):
