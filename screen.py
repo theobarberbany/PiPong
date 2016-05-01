@@ -21,6 +21,16 @@ class screen (object):
 
         self._print_screen()
 
+    def draw_rectangle(self, x, y, w, h, colour):
+        """
+        Draw a w by h rectangle on the screen in the given colour at position (x,y)
+        """
+
+        for i in range(w):
+            for j in range(h):
+                self._update_pixel(x+i, y+j, colour)
+        
+
     def _update_pixel(self, x, y, colour):
 
         sys.stdout.write(chr(27) + "[u")        #Load stored cursor position (Stored at initial print screen to avoid screen resizing issues
@@ -54,10 +64,11 @@ class screen (object):
         
 
 s = screen(80,10)
+s.draw_rectangle(5, 5, 3, 5, 43)
 
 colours = [40,41,42,43,44,45,46,47]
 
-while True:
+while not True:
     c = random.choice(colours)
     x = random.randrange(0, 81)
     y = random.randrange(0, 11)
