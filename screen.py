@@ -64,14 +64,17 @@ class screen (object):
         
 
 s = screen(80,10)
-s.draw_rectangle(5, 5, 3, 5, 43)
+s.draw_rectangle(6, 3, 3, 5, 43)
+s.draw_rectangle(5, 5, 1, 1, 45)
 
 colours = [40,41,42,43,44,45,46,47]
 
-while not True:
+while True:
     c = random.choice(colours)
     x = random.randrange(0, 81)
     y = random.randrange(0, 11)
-    s._update_pixel(x, y, c)
+    w = random.randrange(0, 81 - x + 1)
+    h = random.randrange(0, 11 - y + 1)
+    s.draw_rectangle(x, y, w, h, c)
 
 print("")
