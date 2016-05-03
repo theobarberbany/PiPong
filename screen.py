@@ -13,8 +13,8 @@ COLOUR_WHITE = 47
 
 class screen (object):
 
-    BASE_COLOUR = COLOUR_BLACK                      #40=BLACK, base colour for background
-    NET_COLOUR = COLOUR_WHITE
+    BASE_COLOUR = COLOUR_WHITE                   #40=BLACK, base colour for background
+    NET_COLOUR = COLOUR_BLACK
     
     def __init__ (self, width, height):
         self._width = width
@@ -145,9 +145,11 @@ class screen (object):
         self.output(chr(27) + "[u")                #Restore the original cursor position
 
     def _move_pixel(self, x_new, y_new, colour, x_prev, y_prev):
-        self._update_pixel(x_new, y_new, colour)
+    	self._update_pixel(x_new, y_new, colour)
         if(self._on_screen(x_prev, y_prev)):
-            self._reset_pixel(x_prev, y_prev)
+		print("On Screen trued: " + str(x_prev) + "   ,     " + str(y_prev))
+		self._reset_pixel(x_prev, y_prev)
+
 
     def _move_rectangle(self, x_new, y_new, w_new, h_new, colour,x_prev, y_prev, w_prev, h_prev):
         """
@@ -158,14 +160,19 @@ class screen (object):
 
     def _reset_rectangle(self, x,y,w,h):
         for i in range(w+1):
-            for j in range(h+1):
+            for j in range(h):
                 self._reset_pixel(i+x, j+y)
 
     def _reset_pixel(self, x, y):
         """
         Resets a single pixel to its default value as stored in the screen rows array
         """
-        self._update_pixel(x,y,self.get_default_pixel_value(x,y))
+	try:
+        	self._update_pixel(x,y,self.get_default_pixel_value(x,y-1))
+	except IndexError:
+		print("Pixel: " + str(x) + "    ,     " + str(y) + "\n\n\n\n\n\n\n\n\n\n")
+		raise IndexError
+
 
     def _print_screen(self):                            #DO NOT call this every frame; too slow. Called once in initilisation
         sys.stdout.write(chr(27) + "[?25l")
@@ -209,6 +216,7 @@ class screen (object):
         sys.stdout.write(msg)
         
     
+
 s = screen(80,40)
 
 ######TEST - Moving rectangles
@@ -236,15 +244,15 @@ s = screen(80,40)
 ##    s._gui_delay(0.1)
 
 ##TEST - Print Numbers
-for i in range(10):
-    
-    s.draw_number(29, 2, i, COLOUR_CYAN)
-    s.draw_number(51, 2, i, COLOUR_YELLOW)
+#for i in range(10):
+#    
+#    s.draw_number(29, 2, i, COLOUR_CYAN)
+#    s.draw_number(51, 2, i, COLOUR_YELLOW)
 
-    s._gui_delay(1)
+#    s._gui_delay(1)
 
 
-#s.draw_rectangle(0,0,3,5,47)
+s.draw_rectangle(0,40,1,0,43)
 #s.draw_rectangle(3,3,3,5,46)
 #s.draw_rectangle(0,0,1,1,45)
 
@@ -264,6 +272,6 @@ for i in range(10):
 
 
 
-while True:
-    sys.stdout.write(chr(27) + "[" + str(0) + "C")                  #NOP to keep screen updated
+#while True:
+#    sys.stdout.write(chr(27) + "[" + str(0) + "C")                  #NOP to keep screen updated
 

@@ -4,7 +4,7 @@ import time
 import random
 
 #TEMP - for keyboard testing controls
-import kbtest
+#import kbtest
 cur_pos0 = 0
 cur_pos1 = 0
 
@@ -19,8 +19,8 @@ class game(object):
     def start(self):
         self._s = screen.screen(self._width, self._height)                #Create a new screen with the supplied width and height
 
-        self._player0_bat = bat(self._s, 0)
-        self._player1_bat = bat(self._s, 1, screen.COLOUR_CYAN)
+        #self._player0_bat = bat(self._s, 0)
+        #self._player1_bat = bat(self._s, 1, screen.COLOUR_CYAN)
 
         self._ball = ball(self._s, self, screen.COLOUR_YELLOW)
         self._ball.set_velocity(1, 1)
@@ -137,7 +137,7 @@ class ball(object):
         nx = self._x_pos + self._x_vel
         ny = self._y_pos + self._y_vel      #new x and y values
         
-        if(ny < 0 or ny > h):
+        if(ny <= 0 or ny > h):
             if(random.randrange(0, 3) == 1 ):       #1 in 3 chance to double speed 
                 self._y_pow = 2
             else:
@@ -148,6 +148,7 @@ class ball(object):
         if(nx < 3 or nx > w - 3):
                                             #Check if a bat is occupying the new position, if it is, rebound, else player on opposite side gains a point
             
+
             
             
             if(random.randrange(0, 3) == 1 ):
